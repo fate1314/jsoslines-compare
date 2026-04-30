@@ -116,7 +116,7 @@ async function pickAndLoadFile(side: Side, state: CompareState): Promise<void> {
     canSelectFiles: true,
     canSelectFolders: false,
     filters: {
-      JSONLines: ['jsonl', 'jsonlines', 'txt'],
+      JSON: ['json', 'jsonl', 'jsonlines', 'txt'],
       All: ['*']
     },
     openLabel: `Load ${side} file`
@@ -176,9 +176,7 @@ function tryParseDroppedFileUri(rawPath: string): vscode.Uri | undefined {
 }
 
 function loadFromText(side: Side, content: string, label: string, state: CompareState): void {
-  const lines = content
-    .split(/\r?\n/)
-    .filter((line) => line.trim().length > 0);
+  const lines = parseJsonEntries(content);
 
   if (side === 'left') {
     state.leftLines = lines;
@@ -191,6 +189,23 @@ function loadFromText(side: Side, content: string, label: string, state: Compare
   const maxIndex = getMaxIndex(state);
   if (state.currentIndex > maxIndex) {
     state.currentIndex = Math.max(0, maxIndex);
+  }
+}
+
+function parseJsonEntries(content: string): string[] {
+  const trimmed = content.trim();
+  if (!trimmed) {
+    return [];
+  }
+
+  try {
+    const parsed = JSON.parse(trimmed);
+    const entries = Array.isArray(parsed) ? parsed : [parsed];
+    return entries.map((entry) => JSON.stringify(entry));
+  } catch {
+    return content
+      .split(/\r?\n/)
+      .filter((line) => line.trim().length > 0);
   }
 }
 
@@ -521,7 +536,7 @@ function getWebviewHtml(webview: vscode.Webview, monacoBaseUri: string): string 
     <section class="pane" data-side="left">
       <div class="pane-header">
         <strong>Left</strong>
-        <div class="drop-zone" data-drop="left">Drop .jsonl file here</div>
+        <div class="drop-zone" data-drop="left">Drop .json/.jsonl file here</div>
         <button data-pick="left">Choose File</button>
       </div>
       <div class="pane-body">
@@ -538,7 +553,7 @@ function getWebviewHtml(webview: vscode.Webview, monacoBaseUri: string): string 
     <section class="pane" data-side="right">
       <div class="pane-header">
         <strong>Right</strong>
-        <div class="drop-zone" data-drop="right">Drop .jsonl file here</div>
+        <div class="drop-zone" data-drop="right">Drop .json/.jsonl file here</div>
         <button data-pick="right">Choose File</button>
       </div>
       <div class="pane-body">

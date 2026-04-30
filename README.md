@@ -1,13 +1,13 @@
-# JSONLines Compare
+# JSON/JSONLines Compare
 
-A simple VS Code extension to compare two JSONLines files side-by-side with synchronized navigation.
+A simple VS Code extension to compare two JSON or JSONLines files side-by-side with synchronized navigation.
 
 ## Features
 
 - Open a custom compare tab with left and right panes.
 - Load files via VS Code file picker.
-- Drag and drop `.jsonl`/`.jsonlines`/`.txt` files into either pane.
-- Parse and display the current line as pretty JSON.
+- Drag and drop `.json`/`.jsonl`/`.jsonlines`/`.txt` files into either pane.
+- Parse and display the current JSON entry as pretty JSON.
 - Synchronized navigation (`prev`/`next`/jump to index).
 - Synchronized text search across both files.
 
