@@ -1,0 +1,34 @@
+# Build and source artifacts not needed in VSIX
+src/**
+tsconfig.json
+*.ts
+**/*.map
+
+# Local/project metadata
+.git/**
+.github/**
+.vscode/**
+.gitignore
+
+# Development dependencies and caches
+node_modules/**/test/**
+node_modules/**/tests/**
+node_modules/**/benchmark/**
+node_modules/**/bench/**
+node_modules/**/example/**
+node_modules/**/examples/**
+node_modules/**/docs/**
+node_modules/**/doc/**
+node_modules/**/src/**
+
+# Monaco: keep only min runtime assets needed by webview
+node_modules/monaco-editor/dev/**
+node_modules/monaco-editor/esm/**
+node_modules/monaco-editor/min-maps/**
+node_modules/monaco-editor/monaco.d.ts
+node_modules/monaco-editor/README.md
+node_modules/monaco-editor/CHANGELOG.md
+node_modules/monaco-editor/ThirdPartyNotices.txt
+
+# Exclude generated package
+*.vsix
