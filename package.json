@@ -1,7 +1,7 @@
 {
     "name": "jsonlines-compare",
-    "displayName": "JSONLines Compare",
-    "description": "Compare two JSONLines files side-by-side with synchronized navigation and search.",
+    "displayName": "JSON/JSONLines Compare",
+    "description": "Compare two JSON or JSONLines files side-by-side with synchronized navigation and search.",
     "version": "0.0.1",
     "publisher": "local",
     "engines": {
@@ -18,7 +18,7 @@
         "commands": [
             {
                 "command": "jsonlCompare.open",
-                "title": "JSONLines Compare: Open Comparison View"
+                "title": "JSON/JSONLines Compare: Open Comparison View"
             }
         ]
     },
